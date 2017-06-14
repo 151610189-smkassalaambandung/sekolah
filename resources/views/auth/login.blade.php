@@ -44,7 +44,7 @@
                             <a class="btn btn-link" href="{{ url('/password/reset') }}">Lupa Password</a>
                         </div>
                     </div>
-                    {{!! Form::close() !!}}
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>
