@@ -66,7 +66,7 @@ class RegisterController extends Controller
             $user = User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
-                'passsword' => bcrypt($data['password']),
+                'password' => bcrypt($data['password']),
         ]);
             $memberRole = Role::where('name', 'member')->first();
             $user->attachRole($memberRole);
