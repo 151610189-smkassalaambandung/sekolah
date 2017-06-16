@@ -11,6 +11,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
+    <link href="/css/jquery.dataTables.css" rel="stylesheet">
+    <link href="/css/dataTables.bootstrap.css" rel="stylesheet">
     <link href="{{asset('/css/app.css')}}" rel="stylesheet">
     <link href="{{asset('/css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset('/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -51,6 +53,7 @@
                         <ul class="nav navbar-nav">
                             @if (Auth::check())
                                 <li><a href="{{ url('/home') }}">Dashboard</a></li>
+                                <li><a href="{{ route('authors.index') }}">Penulis</li>
                             @endif
                         </ul>
                     </ul>
@@ -86,12 +89,15 @@
                 </div>
             </div>
         </nav>
-
+        @include('layouts._flash')
         @yield('content')
     </div>
 
     <!-- Scripts -->
     <script src="/js/app.js"></script>
-    <!--script src="{{asset('/js/bootstrap.min.js')}}"--></script>
+    <script src="/js/jquery.dataTables.min.js"></script>
+    <script src="/js/dataTables.bootstrap.min.js"></script>
+    <!--script src="{{asset('/js/bootstrap.min.js')}}"-->
+    @yield('scripts')
 </body>
 </html>
