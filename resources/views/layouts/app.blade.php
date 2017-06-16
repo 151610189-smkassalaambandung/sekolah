@@ -53,8 +53,10 @@
                         <ul class="nav navbar-nav">
                             @if (Auth::check())
                                 <li><a href="{{ url('/home') }}">Dashboard</a></li>
-                                <li><a href="{{ route('authors.index') }}">Penulis</li>
                             @endif
+                            @role('admin')
+                                <li><a href="{{ route('authors.index') }}">Penulis</a></li>
+                            @endrole
                         </ul>
                     </ul>
 
@@ -98,6 +100,7 @@
     <script src="/js/jquery.dataTables.min.js"></script>
     <script src="/js/dataTables.bootstrap.min.js"></script>
     <!--script src="{{asset('/js/bootstrap.min.js')}}"-->
+    <script src="/js/custom.js"></script>
     @yield('scripts')
 </body>
 </html>
