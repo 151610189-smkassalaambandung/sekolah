@@ -14,11 +14,11 @@ class Author extends Model
     	return $this->hasMany('App\Book');
     }
 
-    public function boot()
+    public static function boot()
     {
     	parent::boot();
 
-    	self:;deleting(function($author){
+    	self::deleting(function($author){
     		//mengecek apakah penulis masih punya buku
     		if ($author->books->count() > 0){
     			//menyiapkan pesan error
@@ -29,13 +29,15 @@ class Author extends Model
     			}
     			$html .= '</ul>';
 
-    			Session::flash("flash_notification"[
+    			Session::flash("flash_notification",[
     				"level"=>"danger",
     				"message"=>$html 
     				]);
     			//membatalkan proses penghapusan
     			return false;
+
     		}
     	});
     }
+
 }
