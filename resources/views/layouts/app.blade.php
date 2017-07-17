@@ -11,11 +11,12 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    
+    <link href="/css/app.css" rel="stylesheet">
     <link href="/css/jquery.dataTables.css" rel="stylesheet">
     <link href="/css/dataTables.bootstrap.css" rel="stylesheet">
-    <link href="{{asset('/css/app.css')}}" rel="stylesheet">
-    <link href="{{asset('/css/font-awesome.min.css')}}" rel="stylesheet">
-    <link href="{{asset('/css/bootstrap.min.css')}}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -24,10 +25,7 @@
         ]); ?>
     </script>
 </head>
-<body style="background: url({{asset('secret.jpg')}});
-             background-repeat: no-repeat;
-             background-size: cover;
-             background-attachment: fixed;">
+<body>
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -50,18 +48,21 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        <ul class="nav navbar-nav">
-                            @if (Auth::check())
-                                <li><a href="{{ url('/home') }}">Dashboard</a></li>
-                            @endif
-                            @role('admin')
-                                <li><a href="{{ route('authors.index') }}">Penulis</a></li>
-                                <li><a href="{{ route('books.index') }}">Buku</a></li>
-                            @endrole
-                        </ul>
+                    @if (Auth::check())
+                        <li><a href="{{ url('/home')}}">Dasboard</a></li>
+                    @endif
+                    @role('admin')
+                      <li><a href="{{ route('authors.index')}}">Penulis</a></li>
+                      <li><a href="{{ route('books.index')}}">Buku</a></li>
+                      <li><a href="{{ route('members.index')}}">Member</a></li>
+                      <li><a href="{{ route('statistics.index')}}">Peminjaman</a></li>
+                      @endrole
+                    @if (auth()->check())
+                      <li><a href="{{ url('/settings/profile') }}">Profil</li>
+                    @endif
                     </ul>
-
-                    <!-- Right Side Of Navbar -->
+                        &nbsp;
+                   <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
@@ -69,12 +70,13 @@
                             <li><a href="{{ url('/register') }}">Daftar</a></li>
                         @else
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">   
+                                   {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
-
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="{{ url('/settings/password')}}"><i class="fa fa-btn fa-lock"></i>Ubah Password</a></li>
+                                    
+                                        <li>
                                         <a href="{{ url('/logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -84,9 +86,12 @@
                                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
+
                                     </li>
-                                </ul>
+                                  </ul>
+                            
                             </li>
+
                         @endif
                     </ul>
                 </div>
@@ -98,10 +103,16 @@
 
     <!-- Scripts -->
     <script src="/js/app.js"></script>
+    {{-- <script src="{{asset('/js/bootstrap.min.js')}}"></script> --}}
+
     <script src="/js/jquery.dataTables.min.js"></script>
     <script src="/js/dataTables.bootstrap.min.js"></script>
-    <!--script src="{{asset('/js/bootstrap.min.js')}}"-->
-    <script src="/js/custom.js"></script>
-    @yield('scripts')
+    <script src="{{asset('/js/custom.js')}}"></script>
+@yield('scripts')
+
+
+
+@include('layouts.menu')
+@include('layouts.profile')
 </body>
 </html>

@@ -181,6 +181,8 @@ return [
 
         Yajra\Datatables\DatatablesServiceProvider::class,
 
+        Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
+
     ],
 
     /*
